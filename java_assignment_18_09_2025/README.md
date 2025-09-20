@@ -21,4 +21,6 @@
 - **Case Study 4:** A switch case lets the user choose between `Rectangle` or `Circle`, and the chosen shape’s area is calculated.
 - **Case Study 5:** The areas of a rectangle and a circle are compared using an `if` condition to see which is larger.
 
+## NB:
+- `every case is done in it's own package.`
 ---
