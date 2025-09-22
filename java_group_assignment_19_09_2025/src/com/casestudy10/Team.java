@@ -2,7 +2,7 @@ package com.casestudy10;
 
 public class Team {
     private String teamName;
-    private Player[] players;
+        private Player[] players;
 
     public Team(String teamName, Player[] players) {
         this.teamName = teamName;
