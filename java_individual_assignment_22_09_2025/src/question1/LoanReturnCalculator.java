@@ -1,15 +1,16 @@
 package question1;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoanReturnCalculator implements ActionListener {
-    JFrame card;
-    JLabel amountLabel = new JLabel("Amount Requested");
-    JLabel durationLabel = new JLabel("Duration (Year)");
-    JLabel returnLabel = new JLabel("Total to Return");
+    JFrame frame;
+    JLabel amountLabel = new JLabel("Amount requested");
+    JLabel durationLabel = new JLabel("Duration(year)");
+    JLabel returnLabel = new JLabel("Total to return");
 
     JTextField amountTF = new JTextField();
     JTextField durationTF = new JTextField();
@@ -25,42 +26,48 @@ public class LoanReturnCalculator implements ActionListener {
     }
 
     private void createWindow() {
-        card = new JFrame();
-        card.setTitle("----Total Loan Return Calculator----");
-        card.setBounds(100, 10, 400, 300);
-        card.getContentPane().setBackground(new Color(70, 140, 200));
-        card.getContentPane().setLayout(null);
-        card.setVisible(true);
-        card.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        card.setResizable(false);
+        frame = new JFrame("---- Total Loan Return Calculator ----");
+        frame.setBounds(100, 50, 400, 300);
+        frame.getContentPane().setBackground(new Color(70, 140, 200));
+        frame.getContentPane().setLayout(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setVisible(true);
     }
 
-    public void setLocationAndSize() {
-        amountLabel.setBounds(20, 20, 150, 30);
-        amountTF.setBounds(180, 20, 150, 30);
+    private void setLocationAndSize() {
+        Border blackline = BorderFactory.createLineBorder(Color.BLACK);
 
-        durationLabel.setBounds(20, 70, 150, 30);
-        durationTF.setBounds(180, 70, 150, 30);
+        amountLabel.setBounds(30, 30, 150, 30);
+        amountLabel.setBorder(blackline);
+        amountLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        amountTF.setBounds(200, 30, 150, 30);
 
-        returnLabel.setBounds(20, 120, 150, 30);
-        returnTF.setBounds(180, 120, 150, 30);
-        returnLabel.setHorizontalAlignment(1);
+        durationLabel.setBounds(30, 80, 150, 30);
+        durationLabel.setBorder(blackline);
+        durationLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        durationTF.setBounds(200, 80, 150, 30);
+
+        returnLabel.setBounds(30, 130, 150, 30);
+        returnLabel.setBorder(blackline);
+        returnLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        returnTF.setBounds(200, 130, 150, 30);
         returnTF.setEditable(false);
 
-        calculateBtn.setBounds(120, 180, 120, 40);
+        calculateBtn.setBounds(120, 190, 150, 40);
     }
 
-    public void addComponentsToFrame() {
-        card.add(amountLabel);
-        card.add(amountTF);
-        card.add(durationLabel);
-        card.add(durationTF);
-        card.add(returnLabel);
-        card.add(returnTF);
-        card.add(calculateBtn);
+    private void addComponentsToFrame() {
+        frame.add(amountLabel);
+        frame.add(amountTF);
+        frame.add(durationLabel);
+        frame.add(durationTF);
+        frame.add(returnLabel);
+        frame.add(returnTF);
+        frame.add(calculateBtn);
     }
 
-    public void addActionEvent() {
+    private void addActionEvent() {
         calculateBtn.addActionListener(this);
     }
 
@@ -70,14 +77,16 @@ public class LoanReturnCalculator implements ActionListener {
             double amount = Double.parseDouble(amountTF.getText());
             int years = Integer.parseInt(durationTF.getText());
 
-            double interestRate = 0.006;
+            double interestRate = 0.006; // 0.6% yearly
             double totalReturn = amount + (amount * interestRate * years);
 
-            returnTF.setText(String.format("%.0f", totalReturn));
-
+            returnTF.setText(String.format("%,.0f", totalReturn));
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(card, "Please enter valid numbers!");
+            JOptionPane.showMessageDialog(frame, "Please enter valid numbers!");
         }
     }
 
+    public static void main(String[] args) {
+        new LoanReturnCalculator();
+    }
 }
