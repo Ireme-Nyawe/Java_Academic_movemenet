@@ -1,4 +1,4 @@
-# Java Learning Projects
+# Java Learning
 
 Welcome to my ** 1/ Java learning repository**!.
 
